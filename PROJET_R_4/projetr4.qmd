@@ -1,6 +1,6 @@
 ---
 title: "PROJET R.4: MATRICES"
-format: docx
+format: html
 toc: true
 toc-location: left
 toc-depth: 4
