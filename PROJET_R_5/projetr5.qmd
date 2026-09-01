@@ -1,6 +1,6 @@
 ---
 title: "PROJET R.5: FACTEURS"
-format: docx
+format: html
 toc: true
 toc-location: left
 toc-depth: 4
