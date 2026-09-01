@@ -1,0 +1,270 @@
+---
+title: "PROJET R.1: INTRODUCTION À R"
+format: docx
+toc: true
+toc-location: left
+toc-depth: 4
+number-sections: true
+smooth-scroll: true
+papersize: a4
+---
+
+------------------------------------------------------------------------
+
+# **RÉSUMÉ DU PROJET** {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+Dans le cadre de la formation en R, à la fin de chaque nouveau module d'apprentissage, un mini projet doit être produit. Le travail a été fait dans `Quarto`.
+
+**Sujet étudié :** Prise en main de R
+
+## **Contexte métier**
+
+Vous venez d'être recruté comme assistant statisticien dans une petite structure. Votre responsable veut vérifier que vous maitrisez les bases de R avant de vous confier de vraies données. Il vous demande donc de produire un script démontrant que vous savez :
+
+-   créer des objets ;
+
+-   effectuer des calculs ;
+
+-   afficher des résultats ;
+
+-   documenter votre travail ;
+
+-   utiliser l'aide de R.
+
+## **Travail demandé**
+
+### Partie 1 : Création d'informations
+
+Créer des objets contenant les informations d'un jeune diplômé :
+
+-   nom complet ;
+
+-   âge ;
+
+-   année de naissance ;
+
+-   nombre d'années d'études supérieures ;
+
+-   nombre d'heures d'apprentissage personnel par semaine ;
+
+-   salaire mensuel espéré (FCFA).
+
+### Partie 2 : Calculs élémentaires
+
+À partir des informations créées :
+
+calculer :
+
+-   revenu annuel espéré ;
+
+-   nombre total d'heures d'apprentissage par an ;
+
+-   âge dans cinq ans.
+
+### Partie 3 : Opérations mathématiques
+
+Réaliser :
+
+-   une addition ;
+
+-   une soustraction ;
+
+-   une multiplication ;
+
+-   une division ;
+
+-   une puissance.
+
+Afficher les résultats.
+
+### Partie 4 : Documentation
+
+Utiliser `?mean` puis expliquer :
+
+-   le rôle de la fonction ;
+
+-   un argument important.
+
+### Partie 5 : Mini-rapport
+
+Rédiger un court paragraphe présentant le profil du diplômé.
+
+------------------------------------------------------------------------
+
+# **EXÉCUTION DU PROJET** {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+**Fixer une graine pour les valeurs aléatoires**
+
+```{r}
+set.seed(123)
+```
+
+## Partie 1 : Création d'informations
+
+**Créer des objets contenant les informations d'un jeune diplômé :**
+
+-   **nom complet**
+
+```{r}
+library(charlatan)
+nom <- ch_name(1)
+nom
+```
+
+-   **âge**
+
+```{r}
+# Génération d'un âge pour le diplômé(fourchette 21-27 ans) 
+age <- sample(21:27, 1) 
+age  
+```
+
+-   **année de naissance**
+
+```{r}
+# Soustraction entre l'année actuelle et l'âge du diplômé pour
+# obtenir son année de naissance.
+annee_naissance <- as.numeric(format(Sys.Date(), "%Y")) - age
+annee_naissance  
+```
+
+-   **nombre d'années d'études supérieures**
+
+```{r}
+# Génération d'un nombre d'année d'étude. 
+# Pour simplifier, le nombre d'année 
+# d'études maximum sera fixé à 7
+annee_etudes <- sample(1:7, 1) 
+annee_etudes  
+```
+
+-   **nombre d'heures d'apprentissage personnel par semaine ;**
+
+```{r}
+# Génération d'un nombre d'heures d'apprentissage 
+# personnel par semaine. 
+# Supposer que le nombre d'heure d'apprentissage 
+# personnel maximun 
+# est de 35 heures (5 heures/jour) et le minimum 
+# est de 14 heures (2 heures/jour)
+heures_apprentissage <- sample(14:35, 1) 
+heures_apprentissage  
+```
+
+-   **salaire mensuel espéré (F CFA).**
+
+```{r}
+# Génération d'un revenu selon une loi normale 
+# en supposant une moyenne de 300 000 F CFA et 
+# un écart type de 50 000 F CFA. 
+revenu_mensuel <- round(rnorm(1, mean = 400000, sd = 50000))
+cat("Le revenu mensuel espéré est de", 
+    format(revenu_mensuel,
+           big.mark = " "),
+    "F CFA")
+```
+
+## Partie 2 : Calculs élémentaires
+
+**À partir des informations créées, calculer :**
+
+-   **revenu annuel espéré**
+
+```{r}
+revenu_annuel <- revenu_mensuel * 12 
+cat("Le revenu annuel espéré est", 
+    format(revenu_annuel, 
+           big.mark = " "), 
+    "F CFA")
+```
+
+-   **nombre total d'heures d'apprentissage par an**
+
+```{r}
+heures_apprentissage_annuel <- heures_apprentissage * 52
+cat("Le total d'heures d'apprentissage par an est de", 
+    heures_apprentissage_annuel, 
+    "heures")
+```
+
+-   **âge dans cinq ans.**
+
+```{r}
+age_5ans <- age + 5
+cat("Le diplômé aura", 
+    age_5ans, 
+    "dans 5 ans")
+```
+
+## Partie 3 : Opérations mathématiques
+
+**Réaliser :**
+
+-   **une addition**
+
+```{r}
+x <- round(rnorm(1, mean = 150, sd = 5)) 
+cat("x est égale à :", x)
+y <- round(rnorm(1, mean = 150, sd = 5)) 
+cat("y est égale à :", y)
+z <- round(rnorm(1, mean = 15, sd = 2)) 
+cat("z est égale à :", z)
+
+cat("Le résultat de l'opération x + y + z est : ", 
+    x + y + z) 
+```
+
+-   **une soustraction**
+
+```{r}
+cat("Le résultat de l'opération x - y - z est : ", 
+    x - y - z) 
+```
+
+-   **une multiplication**
+
+```{r}
+cat("Le résultat de l'opération y * z est : ", y * z)  
+```
+
+-   **une division**
+
+```{r}
+cat("Le résultat de l'opération x / (y * z) est : ", 
+    x / (y * z))  
+```
+
+-   **une puissance**
+
+```{r}
+cat("Le résultat de l'opération (x^z) + (y^z) est : ", 
+    (x^z) + (y^z))
+```
+
+## Partie 4 : Documentation
+
+**Utiliser `?mean` puis expliquer :**
+
+-   **le rôle de la fonction ;**
+
+-   **un argument important.**
+
+```{r}
+?mean 
+```
+
+De façon globale cette fonction (mean) permet de calculer la moyenne d'un vecteur de données. Un argument important est l'argument "na.rm" qui permet de gérer les valeurs manquantes lors du calcul de la moyenne sur un jeu de données.
+
+## Partie 5 : Mini-rapport
+
+**Rédiger un court paragraphe présentant le profil du diplômé.**
+
+Le jeune diplômé s'appelle Matias Barrows-Jast. Il est né en 1999 et est âgé de 27 ans. Il a effectué 7 années d'études supérieures et effectue 28 heures d'apprentissage personnel par semaine soit en moyenne 4 heures par jour. Pour son premier emploi il espère un salaire mensuel de 371 976 F CFA soit un revenu annuel de 4 463 712 F CFA.
+
+## **Informations sur l’environnement d’exécution**
+
+**Ces informations incluent la version de R ainsi que packages utilisées (attached packages).**
+
+```{r}
+sessionInfo()
+```
