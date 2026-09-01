@@ -1,0 +1,163 @@
+---
+title: "PROJET R.4: MATRICES"
+format: docx
+toc: true
+toc-location: left
+toc-depth: 4
+number-sections: true
+smooth-scroll: true
+papersize: a4
+---
+
+------------------------------------------------------------------------
+
+# **RÉSUMÉ DU PROJET** {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+Dans le cadre de la formation en R, à la fin de chaque nouveau module d'apprentissage, un mini projet doit être produit.
+
+**Sujet étudié :** Matrices
+
+**Titre :** Analyse de performances académiques
+
+## **Contexte métier :**
+
+Un lycée organise les examens du premier semestre 2026. La direction souhaite analyser simultanément les performances de quelques étudiants dans plusieurs matières.
+
+## Travail demandé
+
+### Partie 1
+
+Créer une matrice représentant :
+
+-   50 élèves ;
+
+-   5 matières : Mathématiques, Physique, SVT, Français, Anglais.
+
+Les notes sont sur 20.
+
+### Partie 2
+
+1.  Calculer :
+
+-   moyenne par élève ;
+
+-   moyenne par matière ;
+
+-   meilleure note par matière ;
+
+-   plus faible note par matière.
+
+2.  Déterminer :
+
+-   meilleur élève ;
+
+-   élève le moins performant ;
+
+### Partie 3
+
+Produire un graphique montrant les moyennes par matière.
+
+### Partie 4
+
+Rédiger une synthèse destinée au proviseur.
+
+------------------------------------------------------------------------
+
+# **EXÉCUTION DU PROJET** {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+## **PARTIE 1**
+
+**Créer une matrice avec:**
+
+-   **50 étudiants**
+
+-   **5 matières : Mathématiques, Physique, SVT, Français, Anglais.**
+
+```{r}
+set.seed(2026)
+t <- 50*5  # nombre de valeurs contenues dans la matrice
+
+# Générer "t" notes de 0 à 20 par tirage aléatoire avec remise
+notes <- sample(0:20, t, replace = TRUE)    
+
+# Les étudiants sont en lignes et les matières en colonnes
+matieres <- c("Mathématiques", "Physique", "SVT", "Français", "Anglais")
+m <- matrix(notes, 50, 5, dimnames = list(paste("Étudiant", 1:50, sep = "_"), matieres))
+m
+```
+
+## **PARTIE 2**
+
+1.  **Calculer :**
+
+-   **moyenne par étudiant**
+
+```{r}
+moyenne_etudiant <- matrix(apply(m, MARGIN = 1, FUN = mean), dimnames = list(paste("Étudiant", 1:50, sep = "_"), "Moyenne"))
+moyenne_etudiant
+```
+
+-   **moyenne par matière**
+
+```{r}
+moyenne_matiere <- matrix(apply(m, MARGIN = 2, FUN = mean), dimnames = list(matieres, "Moyenne"))
+moyenne_matiere
+```
+
+-   **meilleure note par matière**
+
+```{r}
+meilleure_note_matiere <- matrix(apply(m, MARGIN = 2, FUN = max), dimnames = list(matieres, "Meilleure  note"))
+meilleure_note_matiere
+```
+
+-   plus faible note par matière
+
+```{r}
+faible_note_matiere <- matrix(apply(m, MARGIN = 2, FUN = min), dimnames = list(matieres, "Plus faible note"))
+faible_note_matiere
+```
+
+2.  **Déterminer :**
+
+-   **le meilleur élève ;**
+
+```{r}
+coord_meilleur_etudiant <- which(moyenne_etudiant == max(moyenne_etudiant), arr.ind = TRUE)
+coord_meilleur_etudiant
+meilleur_etudiant <- moyenne_etudiant[coord_meilleur_etudiant]
+meilleur_etudiant
+cat("Le meilleur étudiant est l'", c(dimnames(coord_meilleur_etudiant)[[1]]), "avec une moyenne de",  meilleur_etudiant, "/ 20")
+```
+
+-   **l'élève le moins performant ;**
+
+```{r}
+coord_faible_etudiant <- which(moyenne_etudiant == min(moyenne_etudiant), arr.ind = TRUE)
+coord_faible_etudiant
+faible_etudiant <- moyenne_etudiant[coord_faible_etudiant]
+faible_etudiant
+cat("L'étudiant le moins performant est l'", c(dimnames(coord_faible_etudiant)[[1]]), "avec une moyenne de",  faible_etudiant, "/ 20")
+```
+
+## **PARTIE 3**
+
+**Produire un graphique montrant les moyennes par matière.**
+
+```{r}
+barplot(apply(m, MARGIN = 2, FUN = mean), xlab = "Matières", ylab = "Moyenne")
+```
+
+## **PARTIE 4**
+
+**Rédiger une synthèse destinée au proviseur.**
+
+Suite aux examens du premiers semestres, les notes de 50 étudiants ont été recensées dans 5 matières à savoir : Mathématiques, Physique, SVT, Français, Anglais. Le calcul de la moyenne par matière montre que globalement les moyennes sont faibles voire passable (toutes inférieures à 12/20) allant de **8,70 en Mathématiques** à **10,52 en Physique**. Sur ces 50 étudiants l'étudiant(e) le/la plus performant(e) est celui/celle détenant l'idenfiant **Étudiant_30** et ayant obtenu une moyenne de **16,6/20** tandis que le/la moins performant(e) est celui/celle détenant l'idenfiant **Étudiant_31** et a obtenu une moyenne de **3/20** pour les cinq matières enregistrées.
+
+## **Informations sur l’environnement d’exécution**
+
+**Ces informations incluent la version de R ainsi que packages utilisées (attached packages).**
+
+```{r}
+sessionInfo()
+```
