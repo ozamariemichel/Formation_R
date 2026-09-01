@@ -3,11 +3,11 @@ Formation autodidacte en R.
 
 **PLAN DE FORMATION**
 
-- [ ] 1. Introduction à R
-- [ ] 2. Vecteurs
-- [ ] 3. Indexation
-- [ ] 4. Matrices
-- [ ] 5. Facteurs
+- [x] 1. Introduction à R
+- [x] 2. Vecteurs
+- [x] 3. Indexation
+- [x] 4. Matrices
+- [x] 5. Facteurs
 - [ ] 6. Listes
 - [ ] 7. Data frames
 - [ ] 8. Fonctions
