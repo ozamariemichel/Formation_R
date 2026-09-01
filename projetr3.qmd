@@ -1,0 +1,163 @@
+---
+title: "PROJET R.3: INDEXATION"
+format: pdf
+toc: true
+toc-location: left
+toc-depth: 4
+number-sections: true
+smooth-scroll: true
+papersize: a4
+---
+
+------------------------------------------------------------------------
+
+# [**RÉSUMÉ DU PROJET**]{.underline} {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+Dans le cadre de la formation en R, à la fin de chaque nouveau module d'apprentissage, un mini projet doit être produit.
+
+**Sujet étudié :** Indexation
+
+**Titre :** Audit qualité d'un fichier de notes étudiantes
+
+**Objectif :** Maîtriser l'indexation et le filtrage logique.
+
+## **Contexte métier**
+
+Un centre de formation prépare les résultats de sa session d'examens. Avant publication, le service pédagogique suspecte plusieurs erreurs dans le fichier des notes. Vous devez identifier et corriger les anomalies.
+
+## **Travail demandé**
+
+1.  Créer :
+
+-   30 étudiants
+
+-   leurs notes sur 20
+
+2.  Introduire volontairement des erreurs
+
+-   Insérer une valeur manquante (`NA`) dans le vecteur `noms`, à la position **7**
+
+-   Insérer deux valeurs manquantes (`NA`) dans le vecteur `notes` aux positons **12** et **24**
+
+-   Dans le vecteur `notes`, remplacer les valeurs aux positions **5** et **18** respectivement
+
+par **150** et **-10** les notes aberrantes suivantes :
+
+-   Dans le vecteur `noms`, remplacer le nom à la position **9** par une valeur textuelle
+
+aléatoire.
+
+-   Dans le vecteur `notes`, remplacer la note à la position **15** par le texte `"absent"`
+
+3.  Utiliser l'indexation pour :
+
+-   localiser les anomalies
+
+-   corriger les erreurs
+
+-   extraire les étudiants admis (la note d'admission est de 12/20)
+
+-   extraire les étudiants non admis
+
+4.  Produire un mini-rapport expliquant :
+
+-   les erreurs détectées
+
+-   les corrections effectuées
+
+-   les impacts potentiels sur l'analyse
+
+------------------------------------------------------------------------
+
+# [**EXÉCUTION DU PROJET**]{.underline} {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+```{r}
+set.seed(2026)
+library(charlatan)
+```
+
+## **PARTIE 1**
+
+**Créer :**
+
+-   **30 étudiants**
+
+```{r}
+# Générer 30 noms d'étudiants français à partir de la fonction 'ch_name' 
+# du package 'charlatan'
+noms <- ch_name(n = 30, locale = "fr_FR")
+noms
+```
+
+-   **leurs notes sur 20**
+
+```{r}
+# Générer 30 notes aléatoires
+notes <- round(runif(30, min = 0, max = 20))
+notes
+```
+
+## **PARTIE 2**
+
+**Introduire volontairement des erreurs**
+
+-   **Insérer une valeur manquante (**`NA`**) dans le vecteur** `noms`**, à la position 7**
+
+```{r}
+noms[7] <- NA
+noms
+```
+
+-   **Insérer deux valeurs manquantes (`NA`) dans le vecteur `notes` aux positons 12 et 24**
+
+```{r}
+notes[c(12, 24)] <- NA
+notes
+```
+
+-   **Dans le vecteur `notes`, remplacer les valeurs aux positions 5 et 18 respectivement par les notes aberrantes 150 et -10**
+
+```{r}
+notes[c(5, 18)] <- c(150, -10)
+notes
+```
+
+-   **Dans le vecteur `noms`, remplacer le nom à la position 9 par une valeur textuelle aléatoire.**
+
+```{r}
+noms[9] <- "YYYY"
+noms
+```
+
+-   **Dans le vecteur `notes`, remplacer la note à la position 15 par le texte `"absent"`**
+
+```{r}
+notes[15] <- "absent"
+notes
+```
+
+## **PARTIE 3**
+
+**Utiliser l'indexation pour :**
+
+-   **localiser les anomalies**
+
+```{r}
+str(noms); typeof(noms)
+any(is.na(noms)); which(is.na(noms))
+cat("Le vecteur 'noms' contient des données textuelles. Il contient également 
+une valeur manquante située à la position 7 et une donnée textuelle inconnu à 
+la position 9")
+
+str(notes); typeof(notes)
+any(is.na(notes)); which(is.na(notes))
+cat("Le vecteur 'notes' contient des données textuelles. Il contient également 
+des valeurs manquantes situées aux positions 12 et 24, des valeurs aberrantes 
+situées aux positions 5 et 18 ainsi qu'une valeur textuelle inconnue à la 
+position 15")
+```
+
+-   **corriger les erreurs**
+
+```{r}
+# Nettoyer le vecteur "notes" qui est act
