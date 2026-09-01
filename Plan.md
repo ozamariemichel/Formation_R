@@ -1,13 +1,12 @@
-. [x]Introduction à R
-
-2.	Vecteurs ✓ 
-3.	Indexation ✓ 
-4.	Matrices ✓ 
-5.	Facteurs ✓ 
-6.	Listes ✓ 
-7.	Data frames ✓ 
-8.	Fonctions ✓ 
-9.	Packages ✓ 
+- [x] Introduction à R
+- [x] Vecteurs 
+- [x] Indexation  
+- [x] Matrices 
+- [x] Facteurs  
+- [ ] Listes 
+7.	Data frames
+8.	Fonctions 
+9.	Packages 
 10.	Importation de données 
 11.	Exportation de données 
 12.	Gestion des répertoires et projets 
@@ -57,7 +56,7 @@ PHASE 2 — MANIPULATION PROFESSIONNELLE DES DONNÉES
 tidyverse
 45.	Introduction au tidyverse 
 ________________________________________
-dplyr
+**dplyr**
 46.	select() 
 47.	filter() 
 48.	arrange() 
