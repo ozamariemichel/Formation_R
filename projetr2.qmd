@@ -1,0 +1,304 @@
+---
+title: "PROJET R.2: VECTEURS"
+format: docx
+toc: true
+toc-location: left
+toc-depth: 4
+number-sections: true
+smooth-scroll: true
+papersize: a4
+fig-width: 10
+fig-height: 8
+---
+
+------------------------------------------------------------------------
+
+# **RÉSUMÉ DU PROJET** {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+Dans le cadre de la formation en R, à la fin de chaque nouveau module d'apprentissage, un mini projet doit être produit.
+
+**Sujet étudié :** Vecteurs
+
+**Titre :** Analyse des performances commerciales d'une petite entreprise
+
+**Objectif :** Manipuler des vecteurs numériques, gérer les valeurs manquantes et produire des indicateurs descriptifs.
+
+## **Contexte métier**
+
+Une PME souhaite comprendre l'évolution de ses ventes durant l'année 2025. Vous êtes chargé de réaliser une première analyse descriptive.
+
+## **Travail demandé**
+
+1.  Créer les vecteurs :
+
+    -   mois (12 mois)
+
+    -   ventes
+
+    -   dépenses
+
+2.  Introduire volontairement :
+
+    -   2 valeurs manquantes dans ventes
+
+3.  Calculer :
+
+    -   ventes totales
+
+    -   dépenses totales
+
+    -   profit mensuel
+
+    -   profit annuel
+
+    -   moyenne des ventes
+
+    -   médiane des ventes
+
+    -   écart-type des ventes
+
+    -   mois du maximum
+
+    -   mois du minimum
+
+4.  Identifier :
+
+    -   les mois rentables
+
+    -   les mois déficitaires
+
+5.  Rédiger une synthèse.
+
+------------------------------------------------------------------------
+
+# **EXÉCUTION DU PROJET** {style="color: black; background-color: white; font-family: 'Times New Roman', serif; margin-top: 20px;"}
+
+**Fixer une graine pour les valeurs aléatoires**
+
+```{r}
+set.seed(123)
+```
+
+## **PARTIE 1**
+
+**Créer les vecteurs :**
+
+-   **mois (12 mois)**
+
+```{r}
+# Le vecteur "mois" contient tous les mois de l'année 
+mois <- c("Janvier", "Février", "Mars", "Avril", "Mai", 
+          "Juin","Juillet", "Août", "Septembre", "Octobre", 
+          "Novembre", "Décembre") 
+mois
+```
+
+-   **ventes**
+
+```{r}
+# Créer un vecteur "ventes" avec 12 valeurs aléatoires issues 
+# d'une loi normale de paramètres 6 000 000 F CFA et 1 500 000 F CFA
+# pour représenter les ventes pour chaque mois
+ventes <- round(rnorm(12, mean = 6000000, sd = 1500000)) 
+ventes
+```
+
+-   **dépenses**
+
+```{r}
+# Créer un vecteur "depenses" avec 12 valeurs aléatoires issues 
+# d'une loi normale de paramètre 4 500 000 et 800 000 pour 
+# représenter les dépenses pour chaque mois
+depenses <- round(rnorm(12, mean = 4500000, sd = 800000)) 
+depenses
+```
+
+## **PARTIE 2**
+
+**Introduire volontairement 2 valeurs manquantes dans le vecteur `ventes`**
+
+```{r}
+# Faire un tirage sans remise de deux positions aléatoires comprises
+# entre 1 et 12 pour introduire les valeurs "NA" dans le vecteur 
+# "ventes". NA fait référence à "valeur manquante" 
+positions_na <- sample(1:12, 2, replace = FALSE) 
+ventes[positions_na] <- NA
+ventes
+```
+
+## **PARTIE 3**
+
+**Calculer :**
+
+-   **ventes totales**
+
+```{r}
+# Pour calculer les ventes totales, la somme de toutes les ventes sur
+# les 12 mois sera effectuée. Cependant il sera tenu compte des valeurs
+# manquantes présentent. 
+ventes_totales <- sum(ventes, na.rm = TRUE)
+ventes_totales
+```
+
+-   **dépenses totales**
+
+```{r}
+# Pour calculer les dépenses totales, la somme de toutes les dépenses
+# sur les 12 mois sera effectuée.
+depenses_totales <- sum(depenses)
+depenses_totales
+```
+
+-   **profit mensuel**
+
+```{r}
+# Pour calculer les profits mensuels, une soustraction sera effectuée
+# entre les ventes et les dépenses de chaque mois
+profits_mensuels <- ventes - depenses
+profits_mensuels
+```
+
+-   **profit annuel**
+
+```{r}
+# Pour calculer le profit annuel, une somme des profits mensuels de
+# chaque mois sera effectée tout en tenant compte des valeurs
+# manquantes
+profit_annuel <- sum(profits_mensuels, na.rm = TRUE) 
+profit_annuel
+```
+
+-   **moyenne des ventes**
+
+```{r}
+# Calcul de la moyenne des ventes tout en tenant compte des valeurs
+# manquantes
+moyenne_ventes <- mean(ventes, na.rm = TRUE) 
+moyenne_ventes
+```
+
+-   **médiane des ventes**
+
+```{r}
+# Calcul de la médiane des ventes tout en tenant compte des valeurs
+# manquantes
+mediane_ventes <- median(ventes, na.rm = TRUE) 
+mediane_ventes
+```
+
+-   **écart-type des ventes**
+
+```{r}
+# Calcul de l'écart-type des ventes tout en tenant compte des valeurs
+# manquantes
+ecart_type_ventes <- sd(ventes, na.rm = TRUE) 
+ecart_type_ventes
+```
+
+-   **mois du maximum**
+
+```{r}
+# Le mois du maximum de ventes
+# Chercher la position du maximum des ventes et l'utiliser pour
+# retrouver le mois correspondant
+position_max_ventes <- which(ventes == max(ventes, na.rm = TRUE)) 
+cat("Position(s) et valeur(s) du/des maximum(s) de ventes. 
+Position(s) :", position_max_ventes,"\nValeur(s) :", 
+    format(ventes[position_max_ventes], big.mark = " "), 
+    "F CFA") 
+cat("Mois des maximums de ventes effectuées par la PME au cours de l'année", 
+    as.numeric(format(Sys.Date(), "%Y")) - 1, ":",
+    (mois[position_max_ventes]))
+```
+
+-   **mois du minimum**
+
+```{r}
+# Le mois du minimum de ventes
+# Chercher la position du minimum des ventes et l'utiliser pour
+# retrouver le mois correspondant
+position_min_ventes <- which(ventes == min(ventes, na.rm = TRUE)) 
+cat("Position(s) et valeur(s) du/des minimum(s) de ventes. 
+Position(s) :", position_min_ventes, "\nValeur(s) :", 
+    format(ventes[position_min_ventes], big.mark = " "), 
+    "F CFA") 
+cat("Mois du minimum des ventes effectuées par la PME au cours de l'annéee", 
+    as.numeric(format(Sys.Date(), "%Y")) - 1 , ":",
+    (mois[position_min_ventes]))
+```
+
+## **PARTIE 4**
+
+**Identifier :**
+
+-   **les mois rentables**
+
+```{r}
+# Identifier les mois rentables. Un mois est rentable si le profit
+# mensuel de ce mois est supérieur à 0. 
+# Chercher les positions des profits mensuels supérieurs à 0 et les
+# utiliser pour retrouver les mois rentables 
+mois_rentables <- profits_mensuels > 0
+mois_rentables 
+positions_mois_rentables <- which(mois_rentables) 
+positions_mois_rentables 
+cat("Nombre de mois rentables : ", length(mois[positions_mois_rentables])) 
+cat("Mois rentables: ", paste(mois[positions_mois_rentables], collapse = " - "))
+```
+
+-   **les mois déficitaires**
+
+```{r}
+# Identifier les mois déficitaires. Un mois est déficitaire si le
+# profit mensuel de ce mois est inférieur à 0.
+# Chercher les positions des profits mensuels inférieurs à 0 et les
+# utiliser pour retrouver les mois déficitaires.
+mois_deficitaires <- profits_mensuels < 0 
+mois_deficitaires 
+positions_mois_deficitaires<- which(mois_deficitaires) 
+positions_mois_deficitaires 
+cat("Nombre de mois déficitaires : ", 
+    length(mois[positions_mois_deficitaires])) 
+cat("Mois déficitaire : ", mois[positions_mois_deficitaires])
+```
+
+## **PARTIE 5**
+
+**Rédiger une synthèse.**
+
+```{r}
+# # Ajouter un graphique pour visualiser les valeurs des ventes 
+# pour chaque mois 
+viz_ventes <- ventes[-c(positions_na)] 
+viz_mois <- mois[-c(positions_na)] 
+plot(viz_ventes, type = "b", xaxt = "n", 
+     xlab = "Mois (sans Juillet et Novembre)", 
+     ylab = "Ventes (en F CFA)", 
+     main = "Évolution des ventes (hors mois manquants)")
+axis(side = 1, at = 1:10, labels = viz_mois)
+
+# Ajouter les étiquettes de valeurs au niveau des points
+text(x = c(1:3, 5:8),    y = viz_ventes[c(1:3, 5:8)], 
+     labels = paste(format(viz_ventes[c(1:3, 5:8)], big.mark = " "),
+                    rep("F CFA", length(c(1:3, 5:8))), 
+                    sep = " "), 
+     pos = 4, cex = 1, col = "darkblue") 
+text(x = c(4, 9, 10), y = viz_ventes[c(4, 9, 10)], 
+     labels = paste(format(viz_ventes[c(4, 9, 10)], 
+                     big.mark = " "), 
+                    rep("F CFA", length(c(4,9,10))), 
+                        sep = " "), pos = 2, 
+     cex = 1, col = "darkblue")
+```
+
+Sur les 10 mois disposant de données complètes (hors Juillet et Novembre), la PME a généré un chiffre d'affaires total de 60 967 732 F CFA pour des dépenses totales de 43 229 022 F CFA (correspondant aux mêmes mois), dégageant ainsi un bénéfice de 17 738 710 F CFA. Les dépenses totales sur l'ensemble des 12 mois s'élèvent quant à elles à 51 969 303 F CFA. Sur toute l'année 2025, à l'exception des mois dont les valeurs des dépenses sont manquantes (Juillet et Novembre) la PME a pu enregistré 9 mois rentables (Janvier, Février, Mars, Avril, Mai, Juin, Septembre, Octobre, Décembre) contre un seul déficitaire (Août). Ces résultats témoigne de la rentabilité globale de la PME au cours de son exercice sur la période du 1 Janvier 2025 au 31 Décembre 2025. La PME fait le plus de ventes au cours du mois de Juin avec une valeur totale des ventes s'élevant à 8 572 597 F CFA. Elle fait moins de ventes au cours du mois d'Août avec une valeur égale à 4 102 408 F CFA.
+
+Les indicateurs statistiques de tendance centrale révèle que la distribution des ventes est asymétrique vers la droite (car la moyenne des ventes est supérieure à la médiane des ventes; moyenne des ventes: 6 096 773 F CFA; médiane des ventes: 5 880 249 F CFA), c'est-à-dire qu'elle contient des valeurs assez élevées par rapport aux autres comme celles de Mars et Juin (voir graphique ci dessus).
+
+## **Informations sur l’environnement d’exécution**
+
+**Ces informations incluent la version de R ainsi que packages utilisées (attached packages).**
+
+```{r}
+sessionInfo()
+```
