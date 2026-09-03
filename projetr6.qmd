@@ -1,0 +1,367 @@
+---
+title: "PROJET R.6: LISTES"
+format: docx
+toc: true
+toc-location: left
+toc-depth: 4
+number-sections: true
+smooth-scroll: true
+papersize: a4
+---
+
+------------------------------------------------------------------------
+
+# [**RÉSUMÉ DU PROJET**]{.underline} {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+Dans le cadre de la formation en R, à la fin de chaque nouveau module d'apprentissage, un mini projet doit être produit.
+
+**Rappel:** Une liste est une structure de données capable de contenir plusieurs objets, même lorsque ces objets sont de types, de tailles ou de structures différents.
+
+**Titre :** Conception d'une fiche numérique d'étudiant
+
+**Objectif :** Comprendre l'intérêt des listes pour les objets hétérogènes.
+
+## **Contexte métier**
+
+Un Institut Supérieur de Statistique Appliquée français souhaite mettre en place un système numérique de gestion des dossiers étudiants.
+
+Avant de créer une base de données complète, la direction souhaite construire le dossier électronique détaillé d'un étudiant afin de tester la structure des informations qui devront être enregistrées.
+
+L'étudiant appartient à la Licence 2 Statistique durant l'année académique 2025–2026.
+
+Les matières suivies au premier semestre sont :
+
+-   Probabilités
+
+-   Analyse
+
+-   Programmation R
+
+-   Économie
+
+-   Anglais
+
+Le seuil officiel de validation du semestre est fixé à **12/20**.
+
+## **Travail demandé**
+
+### Partie 1 — Création du dossier étudiant
+
+1.  Construire une liste contenant :
+
+-   Informations administratives
+
+    -   identifiant étudiant
+
+    -   nom complet
+
+    -   sexe
+
+    -   âge
+
+    -   ville de résidence
+
+-   Informations académiques
+
+    -   les cinq notes obtenues
+
+    -   la moyenne générale
+
+2.  Le statut doit être calculé automatiquement :
+
+-   Admis si moyenne ≥ 12
+
+-   Non admis sinon
+
+### Partie 2 — Mise à jour du dossier
+
+Ajouter à la liste :
+
+-   numéro de téléphone
+
+-   adresse email
+
+-   année d'étude
+
+-   date d'inscription
+
+### Partie 3 — Correction d'informations
+
+Modifier :
+
+-   le téléphone
+
+-   une note erronée
+
+-   la ville de résidence
+
+### Partie 4 — Inspection de la structure
+
+Afficher :
+
+-   la structure complète
+
+-   le nombre d'éléments
+
+-   les noms des éléments
+
+-   la moyenne finale
+
+### Partie 5 — Rapport
+
+Rédiger une synthèse expliquant :
+
+-   pourquoi un vecteur ne convient pas ;
+
+-   pourquoi une matrice ne convient pas ;
+
+-   pourquoi une liste est adaptée.
+
+------------------------------------------------------------------------
+
+# [**EXÉCUTION DU PROJET**]{.underline} {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+## Partie 1 — Création du dossier étudiant
+
+1.  Créer une liste contenant :
+
+-   Informations administratives
+
+    -   identifiant étudiant
+
+    ```{r}
+    library("charlatan")
+    set.seed(2026)
+
+    informations <- list()
+    informations$identifiant <- paste("E", sample(1:1000, 1), sep  = "_")
+    informations
+    ```
+
+    -   nom complet
+
+    ```{r}
+    informations$nom <- ch_name(locale = "fr_FR")
+    informations
+    ```
+
+    -   sexe
+
+    ```{r}
+    informations$sexe <- "Masculin"
+    informations
+    ```
+
+    -   âge
+
+    ```{r}
+    informations$age <- sample(20: 25, 1)
+    informations
+    ```
+
+    -   ville de résidence
+
+    ```{r}
+    informations$ville <- "Lyon"
+    informations
+    ```
+
+-   Informations académiques
+
+    -   les cinq notes obtenues
+
+    ```{r}
+    note_probabilites <- sample(10: 20, 1)
+
+    note_analyse <- sample(10: 20, 1)
+
+    note_programmation_R <- sample(10: 20, 1)
+
+    note_economie <- sample(10: 20, 1)
+
+    note_anglais <- sample(10: 20, 1)
+    informations$notes <- matrix(c(note_probabilites, note_analyse, 
+                           note_programmation_R, note_economie, 
+                           note_anglais), 
+                    nrow = 5,
+                    ncol = 1, 
+                    dimnames = list(c("Probabilites", "Analyse",
+                                      "Programmation_R", "Economie",
+                                      "Anglais"),
+                                    c("Notes")))
+    informations
+    ```
+
+    -   la moyenne générale
+
+    ```{r}
+    informations$moyenne <- mean(informations$notes)
+    informations
+    ```
+
+2.  Calcul automatique du statut :
+
+-   Admis si moyenne ≥ 12
+
+-   Non admis sinon
+
+```{r}
+informations$admission <- ifelse(informations$moyenne >= 12, "Admis", "Non admis")
+informations
+```
+
+## Partie 2 — Mise à jour du dossier
+
+Ajouter à la liste :
+
+-   numéro de téléphone
+
+```{r}
+informations$telephone <- ch_phone_number(locale = "fr_FR")
+informations
+```
+
+-   adresse email
+
+```{r}
+informations$mail <- paste(
+  tolower(
+    paste(strsplit(informations$nom, split = " ")[[1]], 
+          collapse = "")), 
+  "@gmail.com", 
+  sep = "")
+informations
+```
+
+-   année d'étude
+
+```{r}
+informations$annee_etude <- 2
+informations
+```
+
+-   date d'inscription
+
+```{r}
+jour <- sample(1:31, 1)
+mois <- sample(1:12, 1)
+informations$date_inscription <- as.Date(
+  paste(
+    as.numeric(
+      format(Sys.Date(), format = "%Y")) - 2, 
+    mois, 
+    jour, 
+    sep = "-"))
+informations
+```
+
+## Partie 3 — Correction d'informations
+
+Modifier :
+
+-   le téléphone
+
+```{r}
+set.seed(123)
+informations$telephone <- ch_phone_number(locale = "fr_FR")
+informations
+```
+
+-   une note erronée
+
+```{r}
+# Choix aléatoire d'une note erronnée
+matiere_erronee <- sample(c("Probabilites", "Analyse", "Programmation_R", 
+             "Economie", "Anglais"), 1)
+cat("La note erronée à corriger est celle de la matière", matiere_erronee)
+
+note_probabilites2 <- sample(10: 20, 1)
+note_probabilites2
+informations$notes[matiere_erronee, ] <- note_probabilites2
+informations
+
+# Correction de la moyenne
+informations$moyenne <- mean(informations$notes)
+```
+
+-   la ville de résidence
+
+```{r}
+informations$ville <- "Paris"
+informations
+```
+
+### Partie 4 — Inspection de la structure
+
+Afficher :
+
+-   la structure complète
+
+```{r}
+str(informations)
+```
+
+La liste contient des éléments de type textuelle, numérique et une date.
+
+-   le nombre d'éléments
+
+```{r}
+cat("La liste 'informations' contient", length(informations), 
+    "éléments")
+```
+
+-   les noms des éléments
+
+```{r}
+names(informations)
+```
+
+-   la moyenne finale
+
+```{r}
+informations$moyenne
+```
+
+### Partie 5 — Rapport
+
+Rédiger une synthèse expliquant :
+
+-   pourquoi un vecteur ne convient pas ;
+
+-   pourquoi une matrice ne convient pas ;
+
+-   pourquoi une liste est adaptée.
+
+**Synthèse**
+
+Dans le cadre de cet exercice, il est principalement question de stocker des données de différentes classes (textes, nombres, date, matrice). D'abord, la structure d'un vecteur ne permettrait pas de stocker toutes ces données en une seule fois car ce dernier ne peut stocker qu'une seule classe de données à la fois. Par exemple, en voulant stocker une valeur numérique et du texte dans un vecteur en même temps, celui-ci force la conversion des données afin qu'elles soient de même classe avant de les stocker.
+
+```{r}
+v <- c(2026, "R")
+v   # les deux valeurs sont stockées sous 
+    # forme de texte
+```
+
+Ensuite, une matrice est également inadéquate car elle aussi ne peut stocker qu'un seul type de donnée à la fois. En effet, une matrice n'est en réalité qu'un vecteur ayant deux dimensions (ligne et colonne).
+
+```{r}
+m <- matrix(c("R", 2026, 1, 2), 2, 2)
+m  # toutes les valeurs sont changées en texte
+```
+
+Enfin, une liste possède une structure permettant de contenir à la fois plusieurs classes de données différentes sans pour autant avoir à les convertir. Elle conserve les propriétés propres de chaque classe de données.
+
+```{r}
+l <- list("R", matrix(1:4, 2, 2), 2026)
+l  # Chaque élément conserve sa classe
+```
+
+Ainsi, pour stocker des données de classes différentes (texte, nombres, dates, matrices), la liste est la structure la plus adaptée car elle préserve l'intégrité de chaque élément contrairement à un vecteur ou à une matrice
+
+## **Informations sur l’environnement d’exécution**
+
+**Ces informations incluent la version de R ainsi que packages utilisées (attached packages).**
+
+```{r}
+sessionInfo()
+```
