@@ -38,45 +38,56 @@
 
 ### 4. Matrices
 
-- [ ] Création
-- [ ] Dimensions
-- [ ] Noms de lignes et colonnes
-- [ ] Opérations matricielles
-- [ ] Indexation
-- [ ] Extraction et modification
+- [x] Création
+- [x] Dimensions
+- [x] Noms de lignes et colonnes
+- [x] Opérations matricielles
+- [x] Indexation
+- [x] Extraction et modification
 
 ### 5. Facteurs
 
-- [ ] Variables qualitatives
-- [ ] Facteurs ordonnés
-- [ ] Facteurs non ordonnés
-- [ ] Niveaux
-- [ ] Recodage
-- [ ] Comparaisons
+- [x] Variables qualitatives
+- [x] Facteurs ordonnés
+- [x] Facteurs non ordonnés
+- [x] Niveaux
+- [x] Recodage
+- [x] Comparaisons
 
 ### 6. Listes
 
-- [ ] Création avec `list()`
-- [ ] Objets hétérogènes
-- [ ] Accès avec `[ ]`
-- [ ] Accès avec `[[ ]]`
-- [ ] Accès avec `$`
-- [ ] Modification et ajout d'éléments
+- [x] Création avec `list()`
+- [x] Objets hétérogènes
+- [x] Accès avec `[ ]`
+- [x] Accès avec `[[ ]]`
+- [x] Accès avec `$`
+- [x] Modification et ajout d'éléments
 
 ### 7. Data frames
 
-- [ ] Création
-- [ ] Structure
-- [ ] Variables et observations
-- [ ] Accès aux colonnes
-- [ ] Indexation lignes/colonnes
-- [ ] `$`
-- [ ] `[[ ]]`
-- [ ] `[ , ]`
-- [ ] `subset()`
-- [ ] Filtrage de base
+- [x] Création
+- [x] Structure
+- [x] Variables et observations
+- [x] Accès aux colonnes
+- [x] Indexation lignes/colonnes
+- [x] `$`
+- [x] `[[ ]]`
+- [x] `[ , ]`
+- [x] `subset()`
+- [x] Filtrage de base
 
-### 8. Valeurs manquantes (NA)
+### 8. Fonctions
+
+- [x] Création avec `function()`
+- [x] Arguments
+- [x] Arguments par défaut
+- [x] `return()`
+- [x] Portée des variables
+- [x] Fonctions réutilisables
+- [x] Bonnes pratiques
+
+
+### 9. Valeurs manquantes (NA)
 
 - [ ] Nature des NA
 - [ ] `is.na()`
@@ -84,17 +95,6 @@
 - [ ] `na.omit()`
 - [ ] `complete.cases()`
 - [ ] `na.rm = TRUE`
-- [ ] Stratégies professionnelles de gestion des données manquantes
-
-### 9. Fonctions
-
-- [ ] Création avec `function()`
-- [ ] Arguments
-- [ ] Arguments par défaut
-- [ ] `return()`
-- [ ] Portée des variables
-- [ ] Fonctions réutilisables
-- [ ] Bonnes pratiques
 
 ### 10. Programmation fonctionnelle
 
