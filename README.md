@@ -36,17 +36,7 @@
 - [x] Indexation logique
 - [x] `which()`
 
-### 4. Valeurs manquantes (NA)
-
-- [ ] Nature des NA
-- [ ] `is.na()`
-- [ ] `anyNA()`
-- [ ] `na.omit()`
-- [ ] `complete.cases()`
-- [ ] `na.rm = TRUE`
-- [ ] Stratégies professionnelles de gestion des données manquantes
-
-### 5. Matrices
+### 4. Matrices
 
 - [ ] Création
 - [ ] Dimensions
@@ -55,7 +45,7 @@
 - [ ] Indexation
 - [ ] Extraction et modification
 
-### 6. Facteurs
+### 5. Facteurs
 
 - [ ] Variables qualitatives
 - [ ] Facteurs ordonnés
@@ -64,7 +54,7 @@
 - [ ] Recodage
 - [ ] Comparaisons
 
-### 7. Listes
+### 6. Listes
 
 - [ ] Création avec `list()`
 - [ ] Objets hétérogènes
@@ -73,7 +63,7 @@
 - [ ] Accès avec `$`
 - [ ] Modification et ajout d'éléments
 
-### 8. Data frames
+### 7. Data frames
 
 - [ ] Création
 - [ ] Structure
@@ -85,6 +75,16 @@
 - [ ] `[ , ]`
 - [ ] `subset()`
 - [ ] Filtrage de base
+
+### 8. Valeurs manquantes (NA)
+
+- [ ] Nature des NA
+- [ ] `is.na()`
+- [ ] `anyNA()`
+- [ ] `na.omit()`
+- [ ] `complete.cases()`
+- [ ] `na.rm = TRUE`
+- [ ] Stratégies professionnelles de gestion des données manquantes
 
 ### 9. Fonctions
 
