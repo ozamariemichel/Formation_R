@@ -1,5 +1,7 @@
 # PLAN DE FORMATION R
 ---
+**Notes:** Les notes explicatives de ce dépôt ont été rédigées avec l'assistance d'un modèle de langage. Les projets, scripts et analyses présentés sont le fruit d'un travail personnel de l'auteur.
+
 
 ## PHASE 1 — FONDATIONS DU LANGAGE R
 
