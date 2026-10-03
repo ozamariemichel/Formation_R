@@ -1,0 +1,498 @@
+---
+title: "Cours_introduction"
+format: html
+---
+
+------------------------------------------------------------------------
+
+# MODULE 1 : INTRODUCTION À R ET À L'ENVIRONNEMENT DE TRAVAIL {style="color: black; background-color: white; font-family: 'Times New Roman', serif;"}
+
+------------------------------------------------------------------------
+
+## ÉTAPE 1 : INTUITION
+
+Imaginez un atelier de menuiserie. Vous avez trois espaces :
+
+**L'établi** — c'est là que vous faites des essais rapides. Vous coupez un morceau de bois, vous le mesurez, vous le jettez si ça ne va pas. Rien n'est conservé. C'est la **console R**.
+
+**Le carnet de recettes** — c'est là que vous écrivez les étapes exactes pour fabriquer une chaise. Vous pouvez relire, corriger, transmettre à un apprenti. C'est le **script R**.
+
+**L'atelier complet** — c'est le lieu qui contient vos outils, votre bois, vos plans, votre carnet de recettes, vos commandes en cours. Tout est organisé au même endroit. C'est le **projet RStudio**.
+
+Quand vous débutez, vous passez votre temps à l'établi (console). Vous tapez, vous voyez le résultat, vous ajustez. Puis un jour vous voulez refaire la même chose. Vous ne vous souvenez plus des commandes exactes. C'est là que le carnet de recettes (script) devient indispensable. Puis vous voulez organiser plusieurs projets. Vous ne voulez pas mélanger les étapes de fabrication (commandes) de la chaise et celles de la table. C'est là que l'atelier complet (projet) spécifique à chaque fabrication devient indispensable.
+
+Vous devez toujours travailler dans un **projet**, avec des scripts. La **console** sert à tester, à explorer, à vérifier, pas à produire.
+
+------------------------------------------------------------------------
+
+## ÉTAPE 2 : COURS
+
+### 1. Historique et philosophie de R
+
+R est l'implémentation libre du langage S, développé aux Bell Labs dans les années 1970 par John Chambers et ses collègues. S était un langage conçu par des statisticiens pour des statisticiens. Il introduisait une idée révolutionnaire pour l'époque : un langage interactif où l'on manipule des objets statistiques (vecteurs, matrices, data frames) de manière naturelle.
+
+En 1993, Ross Ihaka et Robert Gentleman, de l'Université d'Auckland en Nouvelle-Zélande, créent R comme une implémentation libre de S. Le nom "R" vient de leurs initiales, mais aussi du jeu de mots avec S. En 1995, R est distribué sous licence GNU GPL. En 1997, le CRAN (Comprehensive R Archive Network) est créé. En 2000, la version 1.0.0 est publiée.
+
+Aujourd'hui, R est maintenu par la R Core Team, un groupe de statisticiens et développeurs bénévoles. R est utilisé dans les universités, les instituts de statistique, les ONG, les banques, les compagnies d'assurance, les entreprises de technologie.
+
+La philosophie de R repose sur plusieurs principes :
+
+**R est un langage, pas un logiciel.** Vous ne cliquez pas sur des boutons. Vous écrivez des instructions.
+
+**R est vectorisé.** Les opérations s'appliquent à des vecteurs entiers, pas à des éléments un par un. Cela rend le code concis et rapide.
+
+**R est fonctionnel.** Les fonctions sont des objets de première classe. Vous pouvez les passer en argument, les retourner, les composer.
+
+**R est extensible.** N'importe qui peut écrire un package et le publier sur le CRAN. Il y a aujourd'hui plus de 20 000 packages disponibles. Cependant il est à noter que le CRAN applique un processus de sélection et de vérification très strict avant d'accepter un package.
+
+**R est open source.** Le code source est public. Vous pouvez l'inspecter, le modifier, le redistribuer.
+
+**R est reproductible.** Un script R bien écrit (au sens large) produit exactement le même résultat sur n'importe quelle machine, à n'importe quel moment. C'est la base de la science reproductible.
+
+### 2. R et RStudio
+
+Il faut distinguer deux choses :
+
+**R** est le moteur. C'est le programme qui interprète le langage R et exécute les calculs. Il s'installe depuis le site du CRAN (<https://cran.r-project.org/>)
+
+**RStudio** est un environnement de développement intégré (IDE). C'est une interface graphique qui rend l'utilisation de R plus confortable. Il peut être télécharger depuis <https://posit.co/downloads>
+
+RStudio n'est pas obligatoire. Vous pouvez utiliser R en ligne de commande, ou avec VS Code, ou avec Emacs ESS. Mais RStudio est le standard de fait dans la communauté statistique. Il offre :
+
+-   Un éditeur de scripts avec coloration syntaxique, autocomplétion, et vérification syntaxique.
+-   Une console interactive.
+-   Un panneau Environment qui liste tous les objets en mémoire.
+-   Un panneau Files/Plots/Packages/Help/Viewer.
+-   Une gestion de projets.
+-   Une intégration Git.
+-   Un support R Markdown et Quarto.
+-   Un débogueur visuel.
+
+L'interface RStudio est organisée en quatre quadrants :
+
+**Quadrant supérieur gauche : Source.** C'est l'éditeur de scripts. Vous y écrivez votre code. Vous pouvez avoir plusieurs scripts ouverts dans des onglets.
+
+**Quadrant inférieur gauche : Console.** C'est là que le code est exécuté. Vous pouvez taper des commandes directement et voir le résultat immédiatement. Le symbole **`>`** en début de ligne est l'invite de commande. Le symbole **`+`** en début de ligne indique que R attend la suite d'une commande incomplète. Si jamais vous vous retrouvez bloqué sur une ligne commençant par le symbole **`+`** à cause d'une erreur de syntaxe (comme une parenthèse ou un guillemet oublié), il vous suffit d'appuyer sur la touche **Échap/Esc** pour annuler la saisie et forcer R à afficher à nouveau l'invite standard **`>`**.
+
+**Quadrant supérieur droit : Environment/History/Connections.** L'onglet **Environment** liste tous les objets en mémoire (vecteurs, data frames, fonctions). L'onglet **History** garde l'historique des commandes.
+
+**Quadrant inférieur droit : Files/Plots/Packages/Help/Viewer.** L'onglet **Files** montre l'arborescence du projet ou du répertoire de travail (dossier de travail). L'onglet **Plots** affiche les graphiques. L'onglet **Packages** liste les packages installés. L'onglet **Help** affiche la docume
+
+### 3. Console, scripts et projets
+
+**La console** est interactive. Vous tapez une commande, vous appuyez sur **Entrée**, R l'exécute et affiche le résultat. C'est parfait pour tester, explorer, vérifier une idée. Mais tout ce que vous tapez dans la console est perdu quand vous fermez R. La console n'est pas reproductible.
+
+***NB:** Bien qu'il soit possible de consulter l'historique pour retrouver certaines commandes, cette méthode devient vite fastidieuse et chronophage dès que les lignes de code se multiplient.*
+
+**Un script** est un fichier texte avec l'extension **`.R`**. Il contient une suite de commandes R. Vous pouvez l'exécuter ligne par ligne (Ctrl+Entrée dans RStudio) ou en entier (Ctrl+Shift+Entrée). Le script est persistant, reproductible, partageable.
+
+***NB:** Ne surtout pas oublier d'enregistrer le script à chaque modification importante.*
+
+**Un projet RStudio** est un dossier qui contient tous les fichiers d'une analyse : scripts, données, graphiques, rapports. Le projet a un fichier **`.Rproj`** à sa racine. Quand vous ouvrez un projet, RStudio :
+
+-   Définit le répertoire de travail sur le dossier du projet.
+-   Restaure l'état de la session précédente (par défaut) pour vous permettre de reprendre exactement là où vous vous étiez arrêté.
+-   Charge les packages listés dans le fichier de configuration.
+-   Ouvre les scripts qui étaient actifs lors de votre dernière fermeture.
+
+***NB:** Pour une reproductibilité parfaite, allez dans `Tools > Global Options > General` et décochez **"Restore .RData into workspace at startup"**. Vous repartirez ainsi d'un environnement propre à chaque ouverture, garantissant que votre script contient bien l'intégralité de vos analyses.*
+
+Le **répertoire de travail** est le dossier où R cherche et écrit les fichiers par défaut. Vous pouvez le connaître avec `getwd()` et le modifier avec `setwd()`. Mais dans un projet RStudio, le projet définit automatiquement le répertoire de travail. Utiliser `setwd()` rend le code non portable.
+
+***NB** : toujours travailler dans un projet RStudio.*
+
+### 4. Objets et affectation
+
+En R, tout est objet. Un nombre est un objet. Un vecteur est un objet. Une fonction est un objet. Un data frame est un objet. Un graphique est un objet.
+
+Pour créer un objet, on utilise l'opérateur d'affectation `<-`.
+
+```{r}
+x <- 5
+y <- 10
+z <- x + y
+```
+
+La commande `x <- 5` se lit "x reçoit 5". Une fois la commande excécutée, l'objet `x` est créé dans l'environnement global. Vous pouvez le voir dans le panneau Environment de RStudio.
+
+**Règle de nommage professionnelle** :
+
+-   Noms en minuscules.
+
+-   Mots séparés par des underscores (ex : `revenu_mensuel`, `nombre_enfants`).
+
+-   Pas d'accents, pas d'espaces, pas de caractères spéciaux.
+
+-   Noms descriptifs mais pas trop longs.
+
+-   Éviter les noms qui masquent des fonctions existantes : `c`, `mean`, `data`, `df` (ex : utiliser **df_menage**), etc.
+
+**Inspection d'un objet** :
+
+```{r}
+x <- 5
+print(x)       # affiche la valeur
+class(x)       # "numeric"
+typeof(x)      # "double"
+str(x)         # num 5
+length(x)      # 1
+attributes(x)  # NULL (pas d'attributs)
+```
+
+**Lister les objets en mémoire** :
+
+```{r}
+ls()              # tous les objets
+ls(pattern = "x") # objets dont le nom contient "x"
+objects()         # équivalent à ls()
+```
+
+**Supprimer un objet** :
+
+```{r}
+rm(x)                    # supprime x
+ls()
+rm(list = ls())          # supprime tous les objets
+ls()
+```
+
+**Attention** : **`rm(list = ls())`** est une commande courante pour repartir de zéro. Mais elle supprime tout, sans confirmation. À utiliser avec précaution.
+
+### 5. Calculs simples
+
+R est une calculatrice puissante. Les opérateurs arithmétiques de base :
+
+```{r}
+2 + 3       # addition : 5
+2 - 3       # soustraction : -1
+2 * 3       # multiplication : 6
+2 / 3       # division : 0.6666667
+2 ^ 3       # puissance : 8
+2 ** 3      # puissance (alternative) : 8
+7 %/% 3     # division entière : 2
+7 %% 3      # modulo (reste) : 1
+```
+
+**Priorité des opérateurs** : R suit les règles mathématiques standard. Les parenthèses forcent la priorité.
+
+``` r
+2 + 3 * 4       # 14 (multiplication avant addition)
+(2 + 3) * 4     # 20 (parenthèses d'abord)
+2 ^ 3 ^ 2       # 512 (puissance associative à droite : 2^(3^2))
+(2 ^ 3) ^ 2     # 64
+```
+
+***Bonus**: utilisez des parenthèses même quand ce n'est pas nécessaire. La clarté prime sur la concision.*
+
+**Fonctions mathématiques courantes** :
+
+```{r}
+sqrt(16)        # racine carrée : 4
+abs(-5)         # valeur absolue : 5
+exp(1)          # exponentielle : 2.718282
+log(10)         # logarithme naturel : 2.302585
+log10(100)      # logarithme décimal : 2
+log2(8)         # logarithme base 2 : 3
+sin(pi/2)       # sinus : 1
+cos(0)          # cosinus : 1
+tan(pi/4)       # tangente : 1
+floor(3.7)      # arrondi inférieur : 3
+ceiling(3.2)    # arrondi supérieur : 4
+round(3.14159, 2)  # arrondi ici à 2 décimales : 3.14
+signif(3.14159, 3) # 3 chiffres significatifs : 3.14
+```
+
+**Valeurs spéciales** :
+
+``` r
+Inf             # infini positif
+-Inf            # infini négatif
+NaN             # Not a Number (ex : 0/0)
+NA              # Not Available (valeur manquante)
+NULL            # objet vide
+```
+
+Différence entre **`NA`**, **`NaN`**, `NULL` :
+
+-   **`NA`** : valeur manquante. Vous ne savez pas quelle est la valeur.
+
+-   **`NaN`** : résultat d'une opération mathématique indéfinie (ex : 0/0, Inf-Inf, Inf/Inf).
+
+-   **`NULL`** : absence d'objet. Un vecteur vide, de longueur nulle (= 0).
+
+**Opérateurs de comparaison** :
+
+```{r}
+2 == 2      #  3 est égale à 3 ? TRUE (égalité)
+2 != 3      # 2 est différent de 3 ? TRUE (différence)
+2 < 3       # TRUE
+2 <= 2      # TRUE
+2 > 3       # FALSE
+2 >= 2      # TRUE
+```
+
+**Opérateurs logiques** :
+
+```{r}
+TRUE & FALSE    # FALSE (ET vectorisé)
+TRUE | FALSE    # TRUE (OU vectorisé)
+!TRUE           # FALSE (NON)
+TRUE && FALSE   # FALSE (ET scalaire)
+TRUE || FALSE   # TRUE (OU scalaire)
+```
+
+Différence entre `&` et `&&` : `&` est vectorisé (s'applique à chaque élément d'un vecteur), `&&` est scalaire (s'arrête au premier élément). Dans une condition `if`, on utilise `&&` et `||`. Dans un filtre vectorisé, on utilise `&` et `|`.
+
+### 6. Aide et documentation
+
+R a une documentation intégrée, exhaustive et de qualité. Savoir la consulter est une compétence fondamentale.
+
+**`?`** : affiche l'aide d'une fonction ou d'un objet interne de Rdont le nom est connu.
+
+``` r
+?mean
+?lm
+?"+"
+```
+
+**`help()`** : équivalent à `?`.
+
+``` r
+help(mean)
+help(package = "dplyr")
+help("+")
+```
+
+**`??`** : recherche dans toute la documentation. Elle permet de trouver des fonctions liées à un sujet général ou un mot-clé.
+
+``` r
+??regression
+??"linear model"
+```
+
+**`help.search()`** : équivalent à `??`.
+
+``` r
+help.search("regression")
+```
+
+**`example()`** : exécute les exemples de la documentation.
+
+``` r
+example(mean)
+example(lm)
+```
+
+**`vignette()`** : ouvre les vignettes (tutoriels) des packages.
+
+``` r
+vignette()
+vignette(package = "dplyr")
+vignette("dplyr")
+```
+
+**`demo()`** : lance des démonstrations.
+
+``` r
+demo()
+demo(graphics)
+```
+
+**`args()`** : affiche les arguments d'une fonction.
+
+``` r
+args(mean)
+args(lm)
+```
+
+**`formals()`** : équivalent à `args()`.
+
+``` r
+formals(mean)
+```
+
+**`sessionInfo()`** : affiche la version de R, les packages chargés, la plateforme.
+
+``` r
+sessionInfo()
+```
+
+**`R.version`** : version de R.
+
+```{r}
+R.version
+R.version.string
+```
+
+**Structure d'une page d'aide** :
+
+-   **Description** : résumé de ce que fait la fonction.
+-   **Usage** : signature de la fonction avec les arguments et leurs valeurs par défaut.
+-   **Arguments** : description de chaque argument.
+-   **Details** : explications techniques.
+-   **Value** : ce que retourne la fonction.
+-   **References** : articles et livres.
+-   **See Also** : fonctions liées.
+-   **Examples** : exemples exécutables.
+
+**Règle** : lire la documentation est une compétence. Avant d'utiliser une fonction, lisez sa documentation. Avant de demander de l'aide, lisez la documentation. Avant de chercher sur Internet, lisez la documentation.
+
+------------------------------------------------------------------------
+
+## ÉTAPE 3 : EXEMPLES
+
+### Exemple 1 : Premier contact avec la console
+
+Ouvrez RStudio. Dans la console, tapez :
+
+``` r
+2 + 2
+```
+
+R affiche :
+
+```         
+[1] 4
+```
+
+Le `[1]` indique que c'est le premier élément de la sortie. Pour un scalaire, c'est trivial. Pour un vecteur, c'est utile.
+
+Tapez :
+
+``` r
+x <- 10
+x
+```
+
+R affiche :
+
+```         
+[1] 10
+```
+
+Tapez :
+
+``` r
+x * 2
+```
+
+R affiche :
+
+```         
+[1] 20
+```
+
+Tapez :
+
+``` r
+y <- x * 2
+y
+```
+
+R affiche :
+
+```         
+[1] 20
+```
+
+Regardez le panneau Environment. Vous verrez `x` et `y` avec leurs valeurs.
+
+### Exemple 2 : Créer un script
+
+Dans RStudio, faites File \> New File \> R Script. Un onglet s'ouvre dans le quadrant supérieur gauche.
+
+Écrivez :
+
+``` r
+# Mon premier script R
+# Auteur : [ton nom]
+# Date : [date]
+
+# Calculs simples
+a <- 5
+b <- 3
+
+somme <- a + b
+produit <- a * b
+difference <- a - b
+quotient <- a / b
+
+# Affichage
+print(somme)
+print(produit)
+print(difference)
+print(quotient)
+```
+
+Sauvegarde le fichier sous `premier_script.R`. Exécutez-le ligne par ligne avec Ctrl+Entrée. Observe les résultats dans la console.
+
+### Exemple 3 : Utiliser l'aide
+
+Tape dans la console :
+
+``` r
+?mean
+```
+
+L'onglet Help s'ouvre dans le quadrant inférieur droit. Lisez la page. Regardez :
+
+-   La description.
+-   La signature : `mean(x, trim = 0, na.rm = FALSE, ...)`.
+-   Les arguments.
+-   Les exemples.
+
+Exécutez les exemples avec :
+
+``` r
+example(mean)
+```
+
+### Exemple 4 : Calculs avec des fonctions
+
+```{r}
+# Racine carrée
+sqrt(144)
+
+# Logarithme
+log(exp(1))    # doit donner 1
+log10(1000)    # doit donner 3
+
+# Arrondi
+round(3.14159, 2)
+round(3.14159, 0)
+signif(3.14159, 3)
+
+# Comparaison
+5 > 3
+5 == 5
+5 != 3
+
+# Logique
+(5 > 3) & (2 < 4)
+(5 > 3) | (2 > 4)
+!(5 > 3)
+```
+
+### Exemple 5 : Créer un projet RStudio
+
+Dans RStudio, fais File \> New Project... \> New Directory \> New Project.
+
+Nommez le projet `formation_r`. Choisissez un dossier parent (par exemple `Documents/R/`).
+
+RStudio crée un dossier `formation_r/` avec un fichier `formation_r.Rproj`. Le répertoire de travail est automatiquement défini sur ce dossier.
+
+Vérifiez avec :
+
+``` r
+getwd()
+```
+
+Vous verrez le chemin du dossier `formation_r`.
+
+Créez un sous-dossier `scripts/` et un sous-dossier `data/`. Sauvegardez votre script `premier_script.R` dans `scripts/`.
+
+**Règle professionnelle** : un projet = un dossier. Tous les fichiers du projet sont dans ce dossier. Aucune référence à des chemins absolus (ex : `C:/Users/...`). Toujours des chemins relatifs au projet (ex : `data/mon_fichier.csv`).
+
+------------------------------------------------------------------------
+
+## FIN DU MODULE 1
