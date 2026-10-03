@@ -13,11 +13,11 @@ format: html
 
 Imaginez un atelier de menuiserie. Vous avez trois espaces :
 
-**L'établi** — c'est là que vous faites des essais rapides. Vous coupez un morceau de bois, vous le mesurez, vous le jettez si ça ne va pas. Rien n'est conservé. C'est la **console R**.
+**L'établi :** c'est là que vous faites des essais rapides. Vous coupez un morceau de bois, vous le mesurez, vous le jettez si ça ne va pas. Rien n'est conservé. C'est la **console R**.
 
-**Le carnet de recettes** — c'est là que vous écrivez les étapes exactes pour fabriquer une chaise. Vous pouvez relire, corriger, transmettre à un apprenti. C'est le **script R**.
+**Le carnet de recettes :** c'est là que vous écrivez les étapes exactes pour fabriquer une chaise. Vous pouvez relire, corriger, transmettre à un apprenti. C'est le **script R**.
 
-**L'atelier complet** — c'est le lieu qui contient vos outils, votre bois, vos plans, votre carnet de recettes, vos commandes en cours. Tout est organisé au même endroit. C'est le **projet RStudio**.
+**L'atelier complet : ** c'est le lieu qui contient vos outils, votre bois, vos plans, votre carnet de recettes, vos commandes en cours. Tout est organisé au même endroit. C'est le **projet RStudio**.
 
 Quand vous débutez, vous passez votre temps à l'établi (console). Vous tapez, vous voyez le résultat, vous ajustez. Puis un jour vous voulez refaire la même chose. Vous ne vous souvenez plus des commandes exactes. C'est là que le carnet de recettes (script) devient indispensable. Puis vous voulez organiser plusieurs projets. Vous ne voulez pas mélanger les étapes de fabrication (commandes) de la chaise et celles de la table. C'est là que l'atelier complet (projet) spécifique à chaque fabrication devient indispensable.
 
