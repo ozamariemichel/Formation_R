@@ -9,12 +9,12 @@
 
 ## PHASE 1 — FONDATIONS DU LANGAGE R
 
-- [ ] 1. Introduction à R et à l'environnement de travail
-- [ ] 2. Types de données et coercition
-- [ ] 3. Vecteurs
-- [ ] 4. Matrices et arrays
-- [ ] 5. Facteurs
-- [ ] 6. Listes
+- [x] 1. Introduction à R et à l'environnement de travail
+- [x] 2. Types de données et coercition
+- [x] 3. Vecteurs
+- [x] 4. Matrices et arrays
+- [x] 5. Facteurs
+- [x] 6. Listes
 - [ ] 7. Data frames
 - [ ] 8. Tibbles
 - [ ] 9. data.table (introduction)
